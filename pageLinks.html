@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Links</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --card: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --text: #f0ede8;
+      --sub: rgba(240,237,232,0.5);
+      --accent1: #e8c97e;
+      --accent2: #c96f6f;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+
+    /* Background texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(232,201,126,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(201,111,111,0.07) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 420px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Avatar */
+    .avatar-wrap {
+      position: relative;
+      margin-bottom: 6px;
+      animation: fadeDown 0.7s ease both;
+    }
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--bg);
+      letter-spacing: -1px;
+      box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px rgba(232,201,126,0.3);
+    }
+    /* Replace the letter below with your initials or an <img> tag */
+
+    .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      text-align: center;
+      animation: fadeDown 0.7s 0.1s ease both;
+    }
+
+    .bio {
+      color: var(--sub);
+      font-size: 0.9rem;
+      font-weight: 300;
+      text-align: center;
+      line-height: 1.6;
+      max-width: 300px;
+      animation: fadeDown 0.7s 0.2s ease both;
+    }
+
+    /* Divider */
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      border-radius: 2px;
+      margin: 4px 0 10px;
+      animation: fadeDown 0.7s 0.25s ease both;
+    }
+
+    /* Links */
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.25s, border-color 0.25s, transform 0.2s;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(255,255,255,0.03));
+      pointer-events: none;
+    }
+
+    .link-btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+    }
+
+    .link-btn:active { transform: translateY(0); }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.25rem;
+    }
+
+    .icon-instagram { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+    .icon-facebook  { background: #1877f2; }
+    .icon-web1      { background: linear-gradient(135deg, #0f9b8e, #0f62fe); }
+    .icon-web2      { background: linear-gradient(135deg, #8e44ad, #3498db); }
+
+    .link-info { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+    .link-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sub);
+    }
+    .link-title { font-size: 1rem; font-weight: 500; }
+
+    .arrow {
+      color: var(--sub);
+      font-size: 1.1rem;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .link-btn:hover .arrow { transform: translateX(3px); color: var(--accent1); }
+
+    /* Stagger animation */
+    .link-btn:nth-child(1) { animation: fadeUp 0.6s 0.3s ease both; }
+    .link-btn:nth-child(2) { animation: fadeUp 0.6s 0.42s ease both; }
+    .link-btn:nth-child(3) { animation: fadeUp 0.6s 0.54s ease both; }
+    .link-btn:nth-child(4) { animation: fadeUp 0.6s 0.66s ease both; }
+
+    /* Footer */
+    .footer {
+      font-size: 0.72rem;
+      color: rgba(240,237,232,0.2);
+      margin-top: 12px;
+      animation: fadeUp 0.6s 0.8s ease both;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── PROFILE ── -->
+    <div class="avatar-wrap">
+      <div class="avatar">YN</div>
+      <!-- To use a photo, replace the <div class="avatar"> with:
+           <img src="your-photo.jpg" class="avatar" style="object-fit:cover;" alt="Profile">
+      -->
+    </div>
+
+    <!-- ✏️ Edit your name below -->
+    <h1 class="name">Your Name</h1>
+
+    <!-- ✏️ Edit your bio below -->
+    <p class="bio">Designer · Creator · Dreamer<br>Welcome to my corner of the internet.</p>
+
+    <div class="divider"></div>
+
+    <!-- ── LINKS ── -->
+    <div class="links">
+
+      <!-- INSTAGRAM -->
+      <a class="link-btn"
+         href="https://www.instagram.com/samligne_national_express?igsh=Ym4xOHp1aDJzbHk3"
+         target="_blank" rel="noopener">
+        <div class="icon icon-instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </div>
+        <div class="link-info">
+          <span class="link-label">Social</span>
+          <!-- ✏️ Edit the title below -->
+          <span class="link-title">Instagram</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <!-- FACEBOOK -->
+      <a class="link-btn"
+         href="https://www.facebook.com/share/17xxGTG8FT/?mibextid=wwXIfr"
+         target="_blank" rel="noopener">
+        <div class="icon icon-facebook">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </div>
+        <div class="link-info">
+          <span class="link-label">Social</span>
+          <!-- ✏️ Edit the title below -->
+          <span class="link-title">Facebook</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <!-- WEBSITE 1 -->
+      <a class="link-btn"
+         href="https://samligne-express.com/"
+         target="_blank" rel="noopener">
+        <div class="icon icon-web1">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          </svg>
+        </div>
+        <div class="link-info">
+          <span class="link-label">Website</span>
+          <!-- ✏️ Edit the title below -->
+          <span class="link-title">My Portfolio</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <!-- WEBSITE 2 -->
+      <a class="link-btn"
+         href="http://samligne.com/"
+         target="_blank" rel="noopener">
+        <div class="icon icon-web2">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+          </svg>
+        </div>
+        <div class="link-info">
+          <span class="link-label">Website</span>
+          <!-- ✏️ Edit the title below -->
+          <span class="link-title">My Blog</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+    </div>
+
+    <p class="footer">© 2026 · All rights reserved</p>
+  </div>
+</body>
+</html>
